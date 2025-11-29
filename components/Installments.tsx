@@ -203,7 +203,7 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                                         </div>
                                         <div>
                                             <p className="text-gray-500 text-xs mb-1">قيمة القسط</p>
-                                            <p className="font-bold text-gray-900">{item.totalAmount}</p>
+                                            <p className="font-bold text-gray-900">{item.paidAmount}</p>
                                         </div>
                                     </div>
 
