@@ -226,9 +226,9 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                                                 setIsPaymentModalOpen(true);
                                             }}
                                             disabled={item.remainingAmount <= 0}
-                                            className={`cursor-pointer flex-2 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${item.remainingAmount <= 0
+                                            className={`flex-2 flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-bold transition-all duration-300 ${item.remainingAmount <= 0
                                                     ? 'bg-green-100 text-green-700 cursor-default'
-                                                    : 'bg-main-color text-white hover:bg-blue-600 shadow-lg shadow-blue-500/30'
+                                                    : 'bg-main-color cursor-pointer text-white hover:bg-blue-600 shadow-lg shadow-blue-500/30'
                                                 }`}
                                         >
                                             {item.remainingAmount <= 0 ? (
