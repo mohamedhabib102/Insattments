@@ -46,7 +46,7 @@ const ManagePage: React.FC = () => {
                         </div>
                         <div>
                             <h2 className="text-2xl font-bold text-gray-800">إدارة الأقساط</h2>
-                            <p className="text-gray-500 text-sm"> أولاد السيد رجب </p>
+                            <p className="text-gray-500 text-sm"> ولاد رجب </p>
                         </div>
                     </div>
 

@@ -173,6 +173,20 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                                         </span>
                                     </div>
 
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div>
+                                            <p className="text-gray-500 text-xs mb-1">تاريخ القسط</p>
+                                            <p className="font-bold text-gray-900">{new Date(item.installmentDate).toLocaleDateString()}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-gray-500 text-xs mb-1"> الموقع </p>
+                                            <p className="font-bold text-gray-900">{item.address}</p>
+                                        </div>
+                                    </div>
+
+
+
+
                                     {/* Progress Bar */}
                                     <div className="mb-6">
                                         <div className="flex justify-between text-sm mb-2">
