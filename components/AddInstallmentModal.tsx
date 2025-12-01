@@ -21,7 +21,9 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
         InstallmentCount: "",
         TotalAmount: "",
         ImageUrl: null as File | null,
-        DueDate: ""
+        DueDate: "",
+        GuarantorNumber: "",
+        GuarantorName: ""
     });
 
     if (!isOpen) return null;
@@ -29,6 +31,8 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!userData?.userId) return;
+
+
 
         setLoading(true);
         const data = new FormData();
@@ -40,6 +44,8 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
         data.append("InstallmentCount", formData.InstallmentCount);
         data.append("TotalAmount", formData.TotalAmount);
         data.append("DueDate", formData.DueDate);
+        data.append("Guarantor_Number", formData.GuarantorNumber);
+        data.append("Guarantor_Name", formData.GuarantorName);
 
         if (formData.ImageUrl) {
             data.append("ImageUrl", formData.ImageUrl);
@@ -60,7 +66,9 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
                 InstallmentCount: "",
                 TotalAmount: "",
                 ImageUrl: null,
-                DueDate: ""
+                DueDate: "",
+                GuarantorNumber: "",
+                GuarantorName: ""
             });
         } catch (error) {
             console.error("Error adding installment:", error);
@@ -128,6 +136,31 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
                             className="text-black w-full p-3 rounded-lg border border-gray-200 focus:border-main-color focus:ring-2 focus:ring-blue-50 outline-none transition-all"
                             value={formData.Address}
                             onChange={e => setFormData({ ...formData, Address: e.target.value })}
+                        />
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">رقم الضامن</label>
+                        <input
+                            required
+                            type="text"
+                            className="text-black w-full p-3 rounded-lg border border-gray-200 focus:border-main-color focus:ring-2 focus:ring-blue-50 outline-none transition-all"
+                            value={formData.GuarantorNumber}
+                            onChange={e => {
+                                const val = e.target.value;
+                                if (/^\d*$/.test(val)) setFormData({ ...formData, GuarantorNumber: val });
+                            }}
+                        />
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">اسم الضامن</label>
+                        <input
+                            required
+                            type="text"
+                            className="text-black w-full p-3 rounded-lg border border-gray-200 focus:border-main-color focus:ring-2 focus:ring-blue-50 outline-none transition-all"
+                            value={formData.GuarantorName}
+                            onChange={e => setFormData({ ...formData, GuarantorName: e.target.value })}
                         />
                     </div>
 

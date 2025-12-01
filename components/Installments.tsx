@@ -19,6 +19,8 @@ interface InstallmentRequest {
     trustReceipt: string;
     installmentDate: string;
     dueDate: string;
+    guarantor_Name: string;
+    guarantor_Number: string;
 }
 
 interface InstallmentsProps {
@@ -320,6 +322,14 @@ export default function Installments({ refreshTrigger = 0 }: InstallmentsProps) 
                                             <div>
                                                 <p className="text-gray-500 text-xs mb-1">عدد الأقساط</p>
                                                 <p className="font-bold text-gray-900">{item.installmentCount}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-500 text-xs mb-1"> رقم الضامن </p>
+                                                <p className="font-bold text-gray-900">{item.guarantor_Number}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-gray-500 text-xs mb-1"> اسم الضامن </p>
+                                                <p className="font-bold text-gray-900">{item.guarantor_Name}</p>
                                             </div>
                                         </div>
 
