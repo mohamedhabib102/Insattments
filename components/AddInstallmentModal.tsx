@@ -20,7 +20,8 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
         AdviceName: "",
         InstallmentCount: "",
         TotalAmount: "",
-        ImageUrl: null as File | null
+        ImageUrl: null as File | null,
+        DueDate: ""
     });
 
     if (!isOpen) return null;
@@ -38,6 +39,7 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
         data.append("AdviceName", formData.AdviceName);
         data.append("InstallmentCount", formData.InstallmentCount);
         data.append("TotalAmount", formData.TotalAmount);
+        data.append("DueDate", formData.DueDate);
 
         if (formData.ImageUrl) {
             data.append("ImageUrl", formData.ImageUrl);
@@ -57,7 +59,8 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
                 AdviceName: "",
                 InstallmentCount: "",
                 TotalAmount: "",
-                ImageUrl: null
+                ImageUrl: null,
+                DueDate: ""
             });
         } catch (error) {
             console.error("Error adding installment:", error);
@@ -125,6 +128,28 @@ export default function AddInstallmentModal({ isOpen, onClose, onSuccess }: AddI
                             className="text-black w-full p-3 rounded-lg border border-gray-200 focus:border-main-color focus:ring-2 focus:ring-blue-50 outline-none transition-all"
                             value={formData.Address}
                             onChange={e => setFormData({ ...formData, Address: e.target.value })}
+                        />
+                    </div>
+
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">تاريخ الاستحقاق</label>
+                        <input
+                            required
+                            type="date"
+                            min={new Date().toISOString().split('T')[0]}
+                            className="text-black w-full p-3 rounded-lg border border-gray-200 focus:border-main-color focus:ring-2 focus:ring-blue-50 outline-none transition-all"
+                            value={formData.DueDate}
+                            onChange={e => {
+                                const selectedDate = e.target.value;
+                                const today = new Date().toISOString().split('T')[0];
+
+                                if (selectedDate < today) {
+                                    alert("لا يمكن اختيار تاريخ قديم. يرجى اختيار تاريخ اليوم أو تاريخ مستقبلي.");
+                                    return;
+                                }
+
+                                setFormData({ ...formData, DueDate: selectedDate });
+                            }}
                         />
                     </div>
 
