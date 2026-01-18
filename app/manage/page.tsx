@@ -30,10 +30,13 @@ const ManagePage: React.FC = () => {
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
                     <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center shadow-sm">
-                            <RiMoneyDollarCircleFill
-                                className="text-main-color"
-                                size={32}
+                        <div className="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center shadow-sm overflow-hidden">
+                            <Image
+                                src="/logo.PNG"
+                                alt="Logo"
+                                width={56}
+                                height={56}
+                                className="object-contain"
                             />
                         </div>
                         <div>

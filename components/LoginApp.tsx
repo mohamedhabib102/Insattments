@@ -6,6 +6,7 @@ import { FaMoneyCheckAlt } from 'react-icons/fa';
 import api from '@/utils/api';
 import { useAuth } from '@/utils/contextapi';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 export default function LoginApp() {
@@ -67,13 +68,13 @@ export default function LoginApp() {
         e.preventDefault();
         const newErrors: { username?: string; password?: string } = {};
 
- 
+
         if (!username.trim()) {
             newErrors.username = 'اسم المستخدم مطلوب';
             return;
         }
 
-      
+
         const passwordError = validatePassword(password);
         if (passwordError) {
             newErrors.password = passwordError;
@@ -124,8 +125,14 @@ export default function LoginApp() {
                         {/* أيقونة نظام الأقساط */}
                         <div className="flex justify-center">
                             <div className="relative">
-                                <div className="w-24 h-24 bg-main-color rounded-2xl flex items-center justify-center shadow-xl transform rotate-3 transition-transform hover:rotate-6">
-                                    <FaMoneyCheckAlt className="w-12 h-12 text-white" />
+                                <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-xl transform rotate-3 transition-transform hover:rotate-6 overflow-hidden border border-gray-100">
+                                    <Image
+                                        src="/logo.PNG"
+                                        alt="Logo"
+                                        width={80}
+                                        height={80}
+                                        className="object-contain"
+                                    />
                                 </div>
                                 <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
                                     <MdAccountBalance className="w-5 h-5 text-white" />
