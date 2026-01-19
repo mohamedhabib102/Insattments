@@ -7,6 +7,7 @@ import api from '@/utils/api';
 import { useAuth } from '@/utils/contextapi';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 
 export default function LoginApp() {
@@ -17,6 +18,7 @@ export default function LoginApp() {
     const [touched, setTouched] = useState<{ username?: boolean; password?: boolean }>({});
     const { login, userData } = useAuth();
     const router = useRouter();
+    const [loading, setLoading] = useState(false)
 
 
     const validatePassword = (pass: string): string | null => {
@@ -35,9 +37,6 @@ export default function LoginApp() {
         return null;
     };
 
-    /**
-     * معالج فقدان التركيز - لعرض الأخطاء فقط بعد التفاعل
-     */
     const handleBlur = (field: 'username' | 'password') => {
         setTouched({ ...touched, [field]: true });
 
@@ -61,16 +60,16 @@ export default function LoginApp() {
         setErrors(newErrors);
     };
 
-    /**
-     * معالج إرسال النموذج
-     */
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true)
         const newErrors: { username?: string; password?: string } = {};
 
 
         if (!username.trim()) {
             newErrors.username = 'اسم المستخدم مطلوب';
+            setLoading(false)
             return;
         }
 
@@ -78,6 +77,7 @@ export default function LoginApp() {
         const passwordError = validatePassword(password);
         if (passwordError) {
             newErrors.password = passwordError;
+            setLoading(false)
             return;
         }
 
@@ -102,6 +102,8 @@ export default function LoginApp() {
 
         } catch (error) {
             console.log(error);
+        } finally{
+            setLoading(false)
         }
 
     };
@@ -250,9 +252,15 @@ export default function LoginApp() {
                         {/* زر تسجيل الدخول */}
                         <button
                             type="submit"
-                            className="cursor-pointer w-full bg-main-color text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-blue-600 transform hover:scale-[1.02] transition-all duration-200 active:scale-[0.98]"
+                            className="cursor-pointer w-full bg-main-color text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl hover:bg-blue-600 transform hover:scale-[1.02] transition-all duration-200 active:scale-[0.98]
+                            text-center"
                         >
-                            تسجيل الدخول
+                            {loading ? 
+                            <AiOutlineLoading 
+                            size={25}
+                            className='animate-spin mx-auto'
+                            />
+                            : " تسجيل الدخول "} 
                         </button>
                     </form>
                 </div>
